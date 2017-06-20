@@ -1,0 +1,138 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<link rel="stylesheet" href="../assets/css/global.css?v=1">
+		<script src="../assets/js/jquery.min.js" type="text/javascript"></script>
+		<script src="../assets/js/common.js?v=1" type="text/javascript"></script>
+		<style>
+			.top{
+				position:fixed;
+				top:0;
+				width:100%;
+			}
+			.top-nav [active]{
+				background-color:#fff;
+			}
+			.top-nav [active] > a{
+				text-decoration:none;
+				color:#333;
+			}
+			.top-back .col-lt{
+				position:relative;
+			}
+			.top-back .col-lt:not(:first-child):after{
+				content:'
+				display:block;
+				width:1px;
+				height:20px;
+				background-color:#d8a515;
+				position:absolute;
+				left:-1px;
+				top:17px;
+			}
+
+			.main {
+				margin-top:59px;
+			}
+		</style>
+	</head>
+	<body>
+		
+		<div class="top">
+			<div class="wrap col primary-bg box-offset-sm">
+				<div class="col col-lt col-offset-sm col-offset-ver-sm text-center top-back">
+					<div class="col-lt">
+						<a class="blk">
+							<i class="blk icon icon-back"></i>
+							<span class="blk">返回</span>
+						</a>
+					</div>
+					<div class="col-lt">
+						<a class="blk" id="opendialog" button="sweetdialog" sweetdialog="#dialog">
+							<i class="blk icon icon-home"></i>
+							<span class="blk">首页</span>
+						</a>
+					</div>
+				</div>
+				<div class="col col-gt col-offset-sm col-offset-ver-sm text-center top-nav">
+					<div class="col-lt">
+						<a class="blk">
+							<i class="blk icon icon-sch"></i>
+							<span class="blk">搜索</span>
+						</a>
+					</div>
+					<div class="col-lt" active>
+						<a class="blk" href="baidu.com">
+							<i class="blk icon icon-cate"></i>
+							<span class="blk">分类</span>
+						</a>
+					</div>
+					<div class="col-lt">
+						<a class="blk">
+							<i class="blk icon icon-fav"></i>
+							<span class="blk">收藏</span>
+						</a>
+					</div>
+					<div class="col-lt">
+						<a class="blk">
+							<i class="blk icon icon-me"></i>
+							<span class="blk">我的</span>
+						</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="nav">
+			
+		</div>
+		<div class="main">
+			<div class="wrap">
+				<ul role="sweetlist" 
+				data-params-af="100"
+				data-params-ba="100"
+				data-params-c="100"
+				data-params-d="100"
+				data-params-e="100"
+				data-tpl="#tpl" data-url="../service/list.php" class="col col-keep col-offset-xs col-offset-ver-xs box-offset-ver-xs box-offset-sm">
+				</ul>
+				
+			</div>
+		</div>
+		
+		
+		<div role="dialog" id="dialog" style="width:100px;height:100px;background-color:#fff" class="dialog left top">
+			<div class="primary-bg">
+				
+			</div>
+		</div>
+		
+
+
+
+		<template id="tpl">
+			<li class="col-lt col-12">
+				<div class="thumb">
+					<img src="{{img}}">
+				</div>
+				<div class="info">
+					<div class="info-price">{{k}}</div>
+				<div class="info-title"><a button="sweetdialog" sweetdialog="#dialog">这个产品真的很酷，希望您能来买</a></div>
+				</div>
+			</li>
+		</template>
+	</body>
+</html>
+
+
+
+
+<script>
+jQuery(window).on('load' ,function(){	
+	//$('#opendialog').trigger('click');
+})
+
+</script>

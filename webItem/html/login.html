@@ -1,0 +1,99 @@
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1,user-scalable=no">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<title></title>
+		<link rel="stylesheet" href="../assets/css/global.css">
+		<script src="../assets/js/jquery.min.js" type="text/javascript"></script>
+		<script src="../assets/js/common.js" type="text/javascript"></script>
+
+		<style>
+			
+
+			.main {
+				
+			}
+
+			.form-row{
+				border-bottom:1px solid #ddd;
+			}
+			.form-row.error{
+				border-bottom-color:#ff0000;
+			}
+			.form-row input[type=text],
+			.form-row input[type=password]{
+				border:0;
+				width:100%
+			}
+			.form-row button{
+				width:100%;
+				border:0;
+				padding:10px;
+				border-radius:4px;
+				
+				
+			}
+			.form .form-row:last-child{
+				border-bottom:0
+			}
+		</style>
+	</head>
+	<body>
+		
+		
+		<div class="main">
+			<div class="wrap box-offset-lg box-offset-ver-lg">
+				
+				<form 
+				action="../service/login.php"
+				role="sweetform" 
+				class="form"
+				onerror="alert(result.data)"
+				ondone="alert(result.data)"
+				>
+					<div class="form-row col-ly box-offset-sm box-offset-ver-sm">
+						<div class="col-lt col-sz-3">
+							<i class="icon icon-phone"></i>
+						</div>
+						<div class="col-lt-3">
+							<input 
+							onok="$(this.parentNode.parentNode).removeClass('error')" 
+							onvalid="$(this.parentNode.parentNode).addClass('error')" 
+							:valid="^1[34578]\d{9}$"  
+							name="account"
+							type="text" 
+							placeholder="请输入用户名">
+						</div>
+					</div>
+
+					<div class="form-row col-ly box-offset-sm box-offset-ver-sm">
+						<div class="col-lt col-sz-3">
+							<i class="icon icon-safe"></i>
+						</div>
+						<div class="col-lt-3">
+							<input 
+							
+							onok="$(this.parentNode.parentNode).removeClass('error')" 
+							onvalid="$(this.parentNode.parentNode).addClass('error')" 
+							:valid="^[0-9-a-zA-Z]{6}$" 
+							type="password"
+							name="password"
+							placeholder="请输入密码"
+							
+							>
+						</div>
+					</div>
+					<div class="form-row box-offset-ver">
+						<button class="primary-bg">立即登录</button>
+					</div>
+				</form>
+
+
+			</div>
+		</div>
+	</body>
+</html>
+
+

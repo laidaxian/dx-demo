@@ -1,0 +1,9 @@
+<?php
+	
+	$data = [];
+	for($i=0;$i<20;$i++){
+		$data[$i] = ['img'=>'../assets/images/pic.jpg','k'=>$i];
+	}
+	echo json_encode( ["code"=>0,"data"=>$data] );
+
+?>

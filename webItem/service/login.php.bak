@@ -1,0 +1,27 @@
+<?php
+	define('ACCOUNT','13760668882');
+	define('PASSWORD','111111');
+
+	$account = isset($_POST['account']) ? $_POST['account'] : '';
+	$password = isset($_POST['password']) ? $_POST['password'] : '';
+	
+	if($account == ACCOUNT && $password == PASSWORD){
+		echo json_encode( ["code"=>1,"data"=>"ok"] );
+		exit;
+	}
+
+	echo json_encode( ["code"=>0,"data"=>"account or password errror"] );
+
+	go();
+	function go(){
+		echo 'hello';
+	}
+
+	$a = ["s"=>1,"b"=>1,"k"=>1];
+?>
+
+<body>
+	<?php foreach($a as $k=>$v){?>
+	<div><?php echo $k?>:<?php echo $v?></div>
+	<?php }?>
+</body>

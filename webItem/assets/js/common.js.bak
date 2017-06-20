@@ -1,0 +1,183 @@
+(function(){
+	
+	var SweetForm = function(element){
+		
+		var formElements = jQuery('[name]',element);
+		var onDone = new Function('result',jQuery(element).attr('ondone'));
+		var onError = new Function('result',jQuery(element).attr('onerror'));
+		var valid = function(){
+			
+			var _valid , _validText;
+			var _return = [];
+
+			formElements.each(function(){
+				
+				_valid = jQuery(this).attr(':valid');
+				_onvalid = jQuery(this).attr('onvalid');
+				_onok = jQuery(this).attr('onok');
+
+				
+				if(_valid){
+					if( !(new RegExp(_valid)) .test(this.value)  ){
+						if(_onvalid){
+							( new Function( _onvalid ) ).call(this);
+						}
+						_return.push(1);
+					}else{
+						if(_onok){
+							( new Function( _onok ) ).call(this);
+						}
+					}
+				}
+			
+			});
+
+			return _return.length > 0
+		};
+
+
+		jQuery(element).on('submit',function(){
+			
+			if(valid()){
+				return false;
+			}
+			//console.log(jQuery(this).serialize())
+			jQuery.post(jQuery(this).attr('action'),jQuery(this).serialize(),function(result){
+				if(result.code == 0){
+					onError.call(element,result)
+				}
+				if(result.code == 1){
+					onDone.call(element,result)
+				}
+			},'json');
+
+			return false;
+
+		});
+		
+		
+	};
+	jQuery.fn.sweetForm = function(){
+		this.each(function(){
+			new SweetForm(this);
+		});
+	}
+
+	
+
+	
+
+
+	
+	var getItem = function(tpl,data){
+		
+		var str = tpl.replace(/\{\{([^\{\}]+)\}\}/g,"'+data.$1+'")
+			.replace(/[\r\n]+/g,"';code+='");
+		var code = '';
+		eval("'"+str+"'")
+
+		return code 
+	}
+	var getParams = function(data){
+
+		var ret = {},m;
+		for(var prop in data){
+			if(( m = prop.match(/^params([A-Z]?\w*)/)) && m[1] ){
+				ret[m[1].toLowerCase()] = data[prop]
+			}
+		}
+		return ret
+	}
+	var SweetList = function(element){
+		this.url = $(element).data('url');
+		this.element = element;
+		this.tpl = $( $(element).data('tpl') ).html();
+		this.params = getParams( $(element).data() );
+		
+		this.load();
+	};
+	
+	SweetList.prototype.load = function(url){
+		this.url = url || this.url;
+		$this = this;
+		$.post(this.url,this.params,function(result){
+			if(result.code == 0 ){
+				$($this.element).html(result.data)
+			}
+			if(result.code == 1 ){
+				
+				var html = '';
+				for(var i=0; i<result.data.length;i++){
+					html += getItem($this.tpl,result.data[i]);
+				}
+				$($this.element).html(html)
+			}
+
+			
+			
+		},'json')
+	}
+	
+	jQuery.fn.sweetList = function(){
+		this.each(function(){
+			new SweetList(this);
+		});
+	}
+	
+	
+
+	
+	var createMask = function(){
+		return $('<div class="dialog-mask"></div>').appendTo('body');
+	}
+	var zIndex = 1000;
+	var sweetDialog = function(element){
+		
+		this.mask = createMask();
+		this.element = $(element);
+		var $this = this;
+		this.mask.on('click',function(){
+			$this.close();
+		})
+	};
+	
+	sweetDialog.prototype = {
+	
+		open:function(){
+			zIndex++;
+			this.element.css({'transform':'scale(1,1)','z-index':zIndex+3})
+			this.mask.css({'transform':'scale(1,1)','z-index':zIndex+2})
+
+		},
+		close:function(){
+		
+			this.element.css({'transform':'scale(0,0)'})
+			this.mask.css({'transform':'scale(0,0)'})
+		}
+	}
+
+	
+
+	jQuery(window).on('load',function(){
+		jQuery('[role=sweetform]').sweetForm();
+		jQuery('[role=sweetlist]').sweetList();
+		
+		jQuery('[button=sweetdialog]').on('click',function(){
+			
+			var context = $($(this).attr('sweetdialog'))
+			var sweetdialog = context.data('sweetdialog');
+			if(!sweetdialog){
+				context.data('sweetdialog',sweetdialog = new sweetDialog(context[0]))
+			}
+			
+			sweetdialog.open();
+
+			return false;
+
+		});
+	})
+	
+
+
+
+})(window)
