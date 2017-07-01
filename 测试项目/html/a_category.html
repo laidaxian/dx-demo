@@ -128,37 +128,35 @@
 			}
 			
 		</style>
-		
+
 		<script type="text/javascript">
 			function allowDrop(ev){
-				ev.preventDefault();
-			}
-			var mx,my;
-			function drag(ev){
-				ev.dataTransfer.setData("mod",ev.target.id);
-				mx = event.offsetX;
-				my = event.offsetY;
-			}
-			
-			
-			
-			function drop(ev){
-			    var d =  new Date();
-				ev.preventDefault();
-				var data = ev.dataTransfer.getData("mod");
-				var tag = document.getElementById(data);
-     		var item = tag.cloneNode(true);
-			 	if(tag.parentNode.id == "leftBox"){
+                ev.preventDefault();
+            }
+            var mx,my;
+            function drag(ev){
+                ev.dataTransfer.setData("mod",ev.target.id);
+                mx = event.offsetX;
+                my = event.offsetY;
+            }
+
+            function drop(ev){
+                var d =  new Date();
+                ev.preventDefault();
+                var data = ev.dataTransfer.getData("mod");
+                var tag = document.getElementById(data);
+                var item = tag.cloneNode(true);
+                if(tag.parentNode.id == "leftBox"){
                     var cld =  ev.target.appendChild(item);
-				}else{
+                }else{
                     var cld =  ev.target.appendChild(tag);
-				}
-				cld.style.cssText ="top:" + (event.offsetY - my) + "px;left:"+ (event.offsetX - mx) +"px;";
+                }
+                cld.style.cssText ="top:" + (event.offsetY - my) + "px;left:"+ (event.offsetX - mx) +"px;";
                 cld.id =  "mod" + d.getTime();
-			}
-		</script>		
+            }
+		</script>
 	</head>
-	
+
 				<div class=""></div>
 	<body>
 		<div class="top">
@@ -166,7 +164,7 @@
 				<div class="col">
 					<div class="col-6 box-offset-pd-lg" role="goto" data-url="category.html" style="margin-left: -60px;"><h3>LOGO厦门理工管理系统</h3></div>
 					<div class="col col-10 col-offset-ver-lg text-center">
-						<div class="col-4 col-lt top-list-item active" role="goto" data-url="category.html"><a>部门管理</a></div>
+						<div class="col-4 col-lt top-list-item active" role="goto" data-url="a_category.html"><a>部门管理</a></div>
 						<div class="col-4 col-lt top-list-item" role="goto" data-url="category.html"><a>部门管理</a></div>
 						<div class="col-4 col-lt top-list-item" role="goto" data-url="category.html"><a>部门管理</a></div>
 						<div class="col-4 col-lt top-list-item" role="goto" data-url="category.html"><a>部门管理</a></div>
