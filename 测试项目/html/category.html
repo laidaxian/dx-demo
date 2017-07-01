@@ -21,7 +21,7 @@
 				color:#f00;
 				border-bottom: 2px solid #f00;
 			}
-			
+
 			.nav{
 				background:rgb(42,53,66);
 				color:rgb(144,144,144);
@@ -40,14 +40,14 @@
 				height:30px;
 				border-radius: 3px;
 				background-color: rgb(255,108,96);
-				
+
 			}
 			.dorotate{
 				transform:rotate(90deg);
 				transition:0.3s;
 				display:inline-block;
 			}
-			
+
 			.main{
 				background:rgb(240,239,244);
 			}
@@ -90,6 +90,15 @@
 				right:1px;
 				background-color:rgb(206,206,206);
 			}
+			.mod{
+				height:45px;
+				line-height: 45px;
+				color:#fff;
+				width:145px;
+				background-color:rgb(108,202,201);
+				border-radius:20px / 22.5px;
+				position:absolute;
+			}
 			.brd-box{
 				height:400px;
 			}
@@ -117,8 +126,33 @@
 			.btn-items:nth-child(4n+3){
 				background-color: rgb(195,195,202);
 			}
-			
 		</style>
+		<script type="text/javascript">
+            function allowDrop(ev){
+                ev.preventDefault();
+            }
+            var mx,my;
+            function drag(ev){
+                ev.dataTransfer.setData("mod",ev.target.id);
+                mx = event.offsetX;
+                my = event.offsetY;
+            }
+
+            function drop(ev){
+                var d =  new Date();
+                ev.preventDefault();
+                var data = ev.dataTransfer.getData("mod");
+                var tag = document.getElementById(data);
+                var item = tag.cloneNode(true);
+                if(tag.parentNode.id == "leftBox"){
+                    var cld =  ev.target.appendChild(item);
+                }else{
+                    var cld =  ev.target.appendChild(tag);
+                }
+                cld.style.cssText ="top:" + (event.offsetY - my) + "px;left:"+ (event.offsetX - mx) +"px;";
+                cld.id =  "mod" + d.getTime();
+            };
+		</script>
 	</head>
 	
 	<body>
@@ -127,7 +161,7 @@
 				<div class="col">
 					<div class="col-6 box-offset-pd-lg" role="goto" data-url="category.html" style="margin-left: -60px;"><h3>LOGO厦门理工管理系统</h3></div>
 					<div class="col col-10 col-offset-ver-lg text-center">
-						<div class="col-4 col-lt top-list-item" role="goto" data-url="category.html"><a>部门管理</a></div>
+						<div class="col-4 col-lt top-list-item" role="goto" data-url="a_category.html"><a>部门管理</a></div>
 						<div class="col-4 col-lt top-list-item active" role="goto" data-url="category.html"><a>部门管理</a></div>
 						<div class="col-4 col-lt top-list-item" role="goto" data-url="category.html"><a>部门管理</a></div>
 						<div class="col-4 col-lt top-list-item" role="goto" data-url="category.html"><a>部门管理</a></div>
@@ -149,34 +183,34 @@
 				<div class="row">
 					<div class="col box-offset-pd nav-list-item">
 						<i class="blk icon icon-des col-3"></i>
-						<a class="blk col col-21 dropdown-btn" trigger-target="#category">
+						<a class="blk col col-21 dropdown-btn" trigger-target="#c1">
 							<div class="col-21 text-center"> <span>系统日志</span> </div>
 							<i class="blk icon icon-jianhao-right-m col-3" dorotate></i>
 						</a>
 					</div>
-							<div class="row dwn-list" id="category" style="display:none;">
-								<div class="dwn-item">123</div>
-							</div>
+					<div class="row dwn-list" id="c1" style="display:none;">
+						<div class="dwn-item">123</div>
+					</div>
 					<div class="col box-offset-pd nav-list-item">
 						<i class="blk icon icon-des col-3"></i>
-						<a class="blk col col-21 dropdown-btn" trigger-target="#category">
+						<a class="blk col col-21 dropdown-btn" trigger-target="#c2">
 							<div class="col-21 text-center"> <span>系统日志</span> </div>
 							<i class="blk icon icon-jianhao-right-m col-3" dorotate></i>
 						</a>
 					</div>
-							<div class="row dwn-list" id="" style="display:none;">
-								<div class="dwn-item">123</div>
-							</div>
+					<div class="row dwn-list" id="c2" style="display:none;">
+						<div class="dwn-item">123</div>
+					</div>
 					<div class="col box-offset-pd nav-list-item">
 						<i class="blk icon icon-des col-3"></i>
-						<a class="blk col col-21 dropdown-btn" trigger-target="#category">
+						<a class="blk col col-21 dropdown-btn" trigger-target="#c3">
 							<div class="col-21 text-center"> <span>系统日志</span> </div>
 							<i class="blk icon icon-jianhao-right-m col-3" dorotate></i>
 						</a>
 					</div>
-							<div class="row dwn-list" id="" style="display:none;">
-								<div class="dwn-item">123</div>
-							</div>
+					<div class="row dwn-list" id="c3" style="display:none;">
+						<div class="dwn-item">123</div>
+					</div>
 					<div class="col box-offset-pd nav-list-item">
 						<i class="blk icon icon-des col-3"></i>
 						<a class="blk col col-21 dropdown-btn" trigger-target="#workmg">
@@ -184,29 +218,29 @@
 							<i class="blk icon icon-jianhao-right-m col-3" dorotate></i>
 						</a>
 					</div>
-							<div class="row dwn-list" id="workmg" style="display:none;">
-								<div class="dwn-item">123</div>
-							</div>
+					<div class="row dwn-list" id="workmg" style="display:none;">
+						<div class="dwn-item">123</div>
+					</div>
 					<div class="col box-offset-pd nav-list-item">
 						<i class="blk icon icon-des col-3"></i>
-						<a class="blk col col-21 dropdown-btn" trigger-target="#category">
+						<a class="blk col col-21 dropdown-btn" trigger-target="#c5">
 							<div class="col-21 text-center"> <span>系统日志</span> </div>
 							<i class="blk icon icon-jianhao-right-m col-3" dorotate></i>
 						</a>
 					</div>
-							<div class="row dwn-list" id="" style="display:none;">
-								<div class="dwn-item">123</div>
-							</div>
+					<div class="row dwn-list" id="c5" style="display:none;">
+						<div class="dwn-item">123</div>
+					</div>
 					<div class="col box-offset-pd nav-list-item">
 						<i class="blk icon icon-des col-3"></i>
-						<a class="blk col col-21 dropdown-btn" trigger-target="#category">
+						<a class="blk col col-21 dropdown-btn" trigger-target="#c6">
 							<div class="col-21 text-center"> <span>系统日志</span> </div>
 							<i class="blk icon icon-jianhao-right-m col-3" dorotate></i>
 						</a>
 					</div>
-							<div class="row dwn-list" id="" style="display:none;">
-								<div class="dwn-item">123</div>
-							</div>
+					<div class="row dwn-list" id="c6" style="display:none;">
+						<div class="dwn-item">123</div>
+					</div>
 				</div>
 			</div>
 			<div class="main col-21">
@@ -237,28 +271,32 @@
 								<span class="blk col-4 text-right">备注</span>
 								<textarea  class="work-item-in col-20"></textarea>
 							</div>
-						</div>	
-					</div>	
+						</div>
+					</div>
 					<div class="footer">
 						<div class="wrap col footer-box">
-							<div class="mod-box col-6">
-								<div class=""></div>
+							<div class="mod-box col-6" style="position:relative;" id="leftBox">
+								<div id="t1" class="mod text-center" draggable="true" ondragstart="drag(event)" style="top:40px;left:50px;">开始</div>
+								<div id="t2" class="mod text-center" draggable="true" ondragstart="drag(event)" style="position:absolute;top:135px;left:50px;">表单</div>
+								<div id="t3" class="mod text-center" draggable="true" ondragstart="drag(event)" style="position:absolute;top:240px;left:50px;">审批</div>
+								<div id="t4" class="mod text-center" draggable="true" ondragstart="drag(event)" style="position:absolute;top:335px;left:50px;">结束</div>
 							</div>
-							<div class="brd-box col-18">2</div>
+							<div class="brd-box col-18" ondrop="drop(event)" ondragover="allowDrop(event)" style="position:relative;" id="rightBox"></div>
 						</div>
 					</div>
 				</form>
-				
+
 				<div class="bottom">
-					<div class="btn-box">	
+					<div class="btn-box">
 						<div class="col btn-list">
 							<div class="col-lt btn-items">保存</div>
 							<div class="col-lt btn-items">保存</div>
 							<div class="col-lt btn-items">保存</div>
 						</div>
-					</div>	
-				</div> 
+					</div>
+				</div>
 			</div>
 		</div>
 	</body>
+
 </html>
